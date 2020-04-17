@@ -52,7 +52,13 @@ class TableInfo:
         self._templates = []
 
     def register(self, template: ObjectTemplate) -> None:
-        self.fields.update({field.name: field for field in template.fields})
+        self.fields.update(
+            {
+                field.name: field
+                for field in template.fields
+                if not field.name.startswith("__")
+            }
+        )
         self.friends.update({friend.tablename: friend for friend in template.friends})
         self._templates.append(template)
 
