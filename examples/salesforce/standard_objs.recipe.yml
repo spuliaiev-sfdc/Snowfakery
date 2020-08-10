@@ -1,0 +1,19 @@
+- object: Account
+  fields:
+    name: The Account
+
+- object: Contact
+  nickname: BossContact
+  fields:
+    FirstName: Da
+    LastName: Boss
+
+- object: Account
+  nickname: Household
+  fields:
+    name: The Household
+
+- object: Account
+  nickname: Organization
+  fields:
+    name: The Organization
