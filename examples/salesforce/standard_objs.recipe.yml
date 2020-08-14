@@ -1,19 +1,30 @@
 - object: Account
+  just_once: True
   fields:
     name: The Account
 
 - object: Contact
   nickname: BossContact
+  just_once: True
   fields:
     FirstName: Da
     LastName: Boss
 
 - object: Account
+  just_once: True
   nickname: Household
   fields:
     name: The Household
+    RecordType: HH_Account
 
 - object: Account
+  just_once: True
   nickname: Organization
   fields:
     name: The Organization
+    RecordType: Organization
+
+- object: Campaign
+  just_once: True
+  fields:
+    name: The Campaign

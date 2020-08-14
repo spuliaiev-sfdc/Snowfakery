@@ -1,19 +1,33 @@
-*.py[cod]
-.*.swp
-.*.swo
-venv/
-.DS_Store
-cli/help.txt
-cli/help.md
-cli/help_clean.md
-.swp
+# Salesforce / SFDX / CCI
+.cci
+.sfdx
+/src.orig
+/src
+
+# Python
+*.pyc
+__pycache__
+build/
+.tox
 pybuild
 snowfakery.egg-info
-build/
 dist/
 docs/api/
 docs/_build/
 .eggs/
+
+# Editors
+*.sublime-project
+*.sublime-workspace
+.vscode
+.idea
+.project
+.settings
+.swp
+
+# Misc
+.DS_Store
+
 .idea/
 .tox/
 tags
