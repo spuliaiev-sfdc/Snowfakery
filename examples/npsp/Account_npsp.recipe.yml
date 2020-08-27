@@ -4,13 +4,12 @@
 
 # cci task run generate_and_load_from_yaml -o generator_yaml ../Snowfakery-new/examples/npsp/Account_npsp.recipe.yml -o num_records 300 -o num_records_tablename Account --org qa
 
-- object: Account
-  fields:
-    Name: FIXME. MAKE AN OGANIZATION
+- include_file: ../salesforce/standard_objs.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
 
 - object: Account
   fields:
-    Name:
+    name:
       fake: company
     Description:
       fake: catch_phrase

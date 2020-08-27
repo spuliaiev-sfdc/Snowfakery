@@ -6,9 +6,16 @@
 
 # Look at examples/salesforce/Contact.recipe.yml for more examples.
 - include_file: ../salesforce/standard_objs.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
 
 - object: Contact
   fields:
+    AccountId:
+      reference: Household
+    FirstName:
+      fake: last_name
+    LastName:
+      fake: first_name
     npe01__AlternateEmail__c:
       fake: email
     npe01__HomeEmail__c:
@@ -41,8 +48,6 @@
       random_number:
         min: 1
         max: 100000
-    npo02__Household__c:
-      reference: Household # you need to have defined an Account with the nickname Household
     npo02__LastCloseDate__c:
       date_between:
         start_date: -1y
@@ -92,7 +97,7 @@
         - All New or Edited Contacts
         - No Contacts
     npsp__Current_Address__c:
-      reference: Account
+      reference: npsp__Address__c
     npsp__First_Soft_Credit_Amount__c:
       random_number:
         min: 1
@@ -133,5 +138,120 @@
       random_number:
         min: 1
         max: 100000
-    npsp__Primary_Affiliation__c:
-      reference: Organization # you need to have defined an Account with the nickname Organization
+    # npsp__Primary_Affiliation__c:
+    #   reference: Organization # you need to have defined an Account with the nickname Organization
+    Salutation:
+      random_choice:
+        - Mr.
+        - Ms.
+        - Mrs.
+        - Dr.
+        - Prof.
+    OtherStreet:
+      fake.text:
+        max_nb_chars: 100
+    OtherCity:
+      fake: city
+    OtherState:
+      fake: state
+    OtherPostalCode:
+      fake: postalcode
+    OtherCountry:
+      fake: country
+    OtherLatitude:
+      fake: latitude
+    OtherLongitude:
+      fake: longitude
+    OtherGeocodeAccuracy:
+      random_choice:
+        - Address
+        - NearAddress
+        - Block
+        - Street
+        - ExtendedZip
+        - Zip
+        - Neighborhood
+        - City
+        - County
+        - State
+        - Unknown
+    MailingStreet:
+      fake.text:
+        max_nb_chars: 100
+    MailingCity:
+      fake: city
+    MailingState:
+      fake: state
+    MailingPostalCode:
+      fake: postalcode
+    MailingCountry:
+      fake: country
+    MailingLatitude:
+      fake: latitude
+    MailingLongitude:
+      fake: longitude
+    MailingGeocodeAccuracy:
+      random_choice:
+        - Address
+        - NearAddress
+        - Block
+        - Street
+        - ExtendedZip
+        - Zip
+        - Neighborhood
+        - City
+        - County
+        - State
+        - Unknown
+    Phone:
+      fake: phone_number
+    Fax:
+      fake: phone_number
+    MobilePhone:
+      fake: phone_number
+    HomePhone:
+      fake: phone_number
+    OtherPhone:
+      fake: phone_number
+    AssistantPhone:
+      fake: phone_number
+    # ReportsToId:
+    #   reference: BossContact # you need to have defined this Contact elsewhere
+    Email:
+      fake: email
+    Title:
+      fake.text:
+        max_nb_chars: 100
+    Department:
+      fake.text:
+        max_nb_chars: 80
+    AssistantName:
+      fake: name
+    LeadSource:
+      random_choice:
+        - Web
+        - Phone Inquiry
+        - Partner Referral
+        - Purchased List
+        - Other
+    Birthdate:
+      date_between:
+        start_date: -1y
+        end_date: today
+    Description:
+      fake.text:
+        max_nb_chars: 100
+    EmailBouncedReason:
+      fake.text:
+        max_nb_chars: 100
+    EmailBouncedDate: <<fake.date>>T<<fake.time>>Z
+    CleanStatus:
+      random_choice:
+        - Matched
+        - Different
+        - Acknowledged
+        - NotFound
+        - Inactive
+        - Pending
+        # - SelectMatch  # causes problems
+        - Skipped

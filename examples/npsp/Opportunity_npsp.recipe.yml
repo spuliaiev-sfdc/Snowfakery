@@ -8,6 +8,33 @@
 # Look at examples/salesforce/Opportunity.recipe.yml for more examples.
 
 - include_file: ../salesforce/standard_objs.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
+
+- object: Opportunity
+  nickname: GrantOpportunity
+  fields:
+    Name: Grant Opportunity
+    Description: A Grant Opportunity
+    Amount:
+      random_number:
+        min: 1
+        max: 100000
+    RecordType: Grant
+    CloseDate: 2021-10-10
+    StageName: Prospecting
+
+- object: Opportunity
+  nickname: MatchingGift
+  fields:
+    Name: Matching Gift
+    Description: A Matching Gift Opportunity
+    Amount:
+      random_number:
+        min: 1
+        max: 100000
+    RecordType: MatchingGift
+    CloseDate: 2022-11-12
+    StageName: Needs Analysis
 
 # randomized values
 - object: Opportunity
@@ -31,14 +58,6 @@
       random_number:
         min: 1
         max: 100000
-    RecordType:
-      random_choice:
-        - Donation
-        - Grant
-        - InKindGift
-        - MajorGift
-        - MatchingGift
-        - Membership
 
 - object: Opportunity
   fields:
@@ -49,6 +68,10 @@
     Description:
       fake.text:
         max_nb_chars: 100
+    CloseDate:
+      date_between:
+        start_date: -1y
+        end_date: today
     StageName:
       random_choice:
         - Prospecting
@@ -159,8 +182,8 @@
         - Potential
         - Submitted
         - Received
-    npsp__Matching_Gift__c:
-      reference: MatchingGift
+    # npsp__Matching_Gift__c:
+    #   reference: MatchingGift
     npsp__Notification_Message__c:
       fake.text:
         max_nb_chars: 100
@@ -177,8 +200,8 @@
         max_nb_chars: 100
     npsp__Notification_Recipient_Name__c:
       fake: name
-    npsp__Previous_Grant_Opportunity__c:
-      reference: Opportunity
+    # npsp__Previous_Grant_Opportunity__c:
+    #   reference: Opportunity
     npsp__Primary_Contact_Campaign_Member_Status__c:
       fake.text:
         max_nb_chars: 40

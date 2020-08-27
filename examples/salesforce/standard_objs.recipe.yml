@@ -10,20 +10,6 @@
     FirstName: Da
     LastName: Boss
 
-- object: Account
-  just_once: True
-  nickname: Household
-  fields:
-    name: The Household
-    RecordType: HH_Account
-
-- object: Account
-  just_once: True
-  nickname: Organization
-  fields:
-    name: The Organization
-    RecordType: Organization
-
 - object: Campaign
   just_once: True
   fields:
