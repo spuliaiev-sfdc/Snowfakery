@@ -61,13 +61,15 @@ class TestRestart(unittest.TestCase):
     def test_circular_references(self, write_row):
         yaml_data = """
             - object: parent
+              nickname: TheParent
               fields:
                 child:
                     - object: child
+                      nickname: TheChild
                       fields:
                         parent:
                             reference:
-                                parent
+                                TheParent
             """
         continuation_file = StringIO()
         generate(StringIO(yaml_data), generate_continuation_file=continuation_file)
