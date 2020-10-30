@@ -44,6 +44,8 @@ class TestRestart(unittest.TestCase):
     def test_faker_dates_work(self, write_row):
         yaml = """
             - object: foo
+              nickname: Blah
+              just_once: True
               count: 50
               fields:
                 a_date:
@@ -54,3 +56,24 @@ class TestRestart(unittest.TestCase):
         continuation_file = StringIO()
         generate(StringIO(yaml), generate_continuation_file=continuation_file)
         assert "a_date" in continuation_file.getvalue()
+
+    @mock.patch("snowfakery.output_streams.DebugOutputStream.write_row")
+    def test_circular_references(self, write_row):
+        yaml_data = """
+            - object: parent
+              fields:
+                child:
+                    - object: child
+                      fields:
+                        parent:
+                            reference:
+                                parent
+            """
+        continuation_file = StringIO()
+        generate(StringIO(yaml_data), generate_continuation_file=continuation_file)
+        continuation_yaml = continuation_file.getvalue()
+        print(continuation_yaml)
+        generate(
+            StringIO(yaml_data),
+            continuation_file=StringIO(continuation_yaml),
+        )

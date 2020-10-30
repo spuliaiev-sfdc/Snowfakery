@@ -243,6 +243,7 @@ class Globals(yaml.YAMLObject):
         state = self.__dict__.copy()
         del state["intertable_dependencies"]
         del state["named_slots"]
+        del state["last_seen_obj_of_type"]
         return state
 
     def __setstate__(self, state):
@@ -557,7 +558,10 @@ class ObjectRow(yaml.YAMLObject):
         return f"<ObjectRow {self._tablename} {self.id}>"
 
     def __getstate__(self):
-        return {"_tablename": self._tablename, "_values": self._values}
+        values = [
+            (k, v) for k, v in self._values.items() if not isinstance(v, ObjectRow)
+        ]
+        return {"_tablename": self._tablename, "_values": values}
 
     def __setstate__(self, state):
         for slot, value in state.items():
